@@ -2,6 +2,8 @@ import asyncio
 import concurrent.futures
 import logging
 import uuid
+
+import pymongo
 from motor.motor_asyncio import AsyncIOMotorClient
 import asyncpg
 from random import randint, choice
@@ -103,6 +105,7 @@ async def load_data_mongo(client, semaphore, movie):
 async def get_movie_from_mongo(client, movie_id):
     db = client[MONGO_DB]
     collection = db[MONGO_COLLECTION]
+    collection.create_index([("movie_id", pymongo.ASCENDING)], unique=True)
     movie = await collection.find({'movie_id': movie_id}).to_list()
     return movie
 
@@ -110,7 +113,8 @@ async def get_movie_from_mongo(client, movie_id):
 async def get_movies_by_user_from_mongo(client, user_id):
     db = client[MONGO_DB]
     collection = db[MONGO_COLLECTION]
-
+    collection.create_index([("bookmarks.user_id", pymongo.ASCENDING)])
+    collection.create_index([("ratings.user_id", pymongo.ASCENDING)])
     # Преобразуем user_id в строку, если он в формате UUID
     user_id_str = str(user_id)
 

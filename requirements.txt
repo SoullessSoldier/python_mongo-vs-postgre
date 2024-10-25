@@ -1,3 +1,2 @@
 asyncpg
 motor
-bson

@@ -6,11 +6,7 @@
 В Постгрес по дефолту видно (SHOW max_connections), что можно также \
 выставить в функции asyncpg.create_pool max_size=100
 
-Work with Postgres
-Work with Postgres takes 1129.66 seconds
-
-Work with Mongo
-Work with Mongo takes 48.26 seconds
+Очистка коллекции в Монго shell: db.movies.deleteMany({})
 
 ### Структура БД
 #### Mongo:
@@ -32,8 +28,11 @@ Work with Mongo takes 48.26 seconds
         }
     ]
 }
-```
 
+
+
+```
+Также в коллекции movies создан индекс по полю movie_id 
 
 #### PostgreSQL
 ```postgresql
