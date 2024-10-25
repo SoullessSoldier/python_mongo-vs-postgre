@@ -32,7 +32,7 @@
 
 
 ```
-Также в коллекции movies создан индекс по полю movie_id 
+Также в коллекции movies создаются индексы по полю movie_id, ratings.user_id, bookmarks.user_id 
 
 #### PostgreSQL
 ```postgresql
